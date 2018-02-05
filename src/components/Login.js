@@ -1,6 +1,38 @@
 import React from 'react'
+import api from '../services/api';
 
-const Login = () =>{
+
+class Login extends React.Component {
+  constructor() {
+      super();
+      this.state = {
+        error: false,
+        fields: {
+          username: '',
+          password: ''
+        }
+      };
+    }
+
+    handleChange = e => {
+      const newFields = { ...this.state.fields, [e.target.name]: e.target.value };
+      this.setState({ fields: newFields });
+    };
+
+    handleSubmit = e => {
+      e.preventDefault();
+      api.auth.login(this.state.fields).then(res =>{
+        if (res.error) {
+          this.setState({ error: true });
+        } else {
+          console.log("User is", res);
+          this.props.handleLogin(res);
+          this.props.history.push('/profile');
+        }
+      });
+    };
+    render(){
+    const { fields } = this.state;
 
     return(
       <div className="ui center aligned grid">
@@ -10,21 +42,22 @@ const Login = () =>{
               Log-in to your account
             </div>
           </h2>
-          <form className="ui form">
+          {this.state.error ? <h1>Try Again</h1> : null}
+          <form className="ui form" onSubmit={this.handleSubmit}>
             <div className="ui stacked secondary  segment">
               <div className="field">
                 <div className="ui left icon input">
                   <i className="user icon"></i>
-                  <input type="text" name="email" placeholder="E-mail address" />
+                  <input type="text" name="username" placeholder="Username"                 value={fields.username} onChange={this.handleChange} />
                 </div>
               </div>
               <div className="field">
                 <div className="ui left icon input">
                   <i className="lock icon"></i>
-                  <input type="password" name="password" placeholder="Password" />
+                  <input type="password" name="password" placeholder="Password" value={fields.password} onChange={this.handleChange}/>
                 </div>
               </div>
-              <div className="ui fluid large blue submit button">Login</div>
+              <button type="submit" className="ui fluid large blue submit button">Login</button>
             </div>
 
             <div className="ui error message"></div>
@@ -32,12 +65,13 @@ const Login = () =>{
           </form>
 
           <div className="ui message">
-            New to us? <a href="https://s.codepen.io/voltron2112/debug/PqrEPM?">Register</a>
-          </div>
+            New to us? <a href="#">Register</a>
         </div>
       </div>
+    </div>
 
-    )
+      )
+    }
 }
 
 export default Login
