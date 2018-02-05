@@ -1,7 +1,10 @@
 import React from 'react'
 
-const Homepage = () =>{
-
+const Homepage = props =>{
+  const token = localStorage.getItem('token')
+  if(!token){
+    props.history.push('/')
+  }
     return(
       <div className=" header center">
         Welcome

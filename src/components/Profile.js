@@ -2,6 +2,7 @@ import React from 'react'
 var dateFormat = require('dateformat')
 
 const Profile = props =>{
+    console.log("cool",props);
     const userType = props.currentUser.user_type
     const rate = props.currentUser.rate
     const studentReservations = props.currentUser.reservations
@@ -9,6 +10,14 @@ const Profile = props =>{
     const currentUser = props.currentUser.name
     console.log("type", userType);
     console.log("profile", props.currentUser.name);
+
+
+    const token = localStorage.getItem('token')
+    if(!token){
+      props.history.push('/')
+    }
+
+
     return(
       <div className="ui grid">
         <div className="eight wide column">

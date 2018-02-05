@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import Navbar from './components/Navbar'
 import Homepage from './components/Homepage'
-import About from './components/About'
 import Login from './components/Login'
 import Profile from './components/Profile'
+import Reservation from './components/Reservation'
 import { Route } from 'react-router-dom'
 import api from './services/api'
 
@@ -23,6 +23,7 @@ class App extends Component {
   }
 
   handleLogin = (user) => {
+    console.log(user);
     const currentUser = {currentUser: user}
     const userOnline = {token: user.id, type: user.user_type}
     console.log("INNN", userOnline);
@@ -35,6 +36,7 @@ class App extends Component {
     this.setState({auth: {currentUser:{}}})
   }
   render() {
+    console.log("props",this.props);
     console.log("app state", this.state);
     return (
       <div className="App">
@@ -42,10 +44,10 @@ class App extends Component {
           handleLogout={this.handleLogout}
           />
         <div className="ui container">
-          <Route exact path="/home" component={Homepage} />
-          <Route exact path="/about" component={About} />
+          <Route exact path="/home" render={routerProps => {return <Homepage history={routerProps.history} />}} />
+          <Route exact path="/reservation" component={Reservation} />
           <Route exact path="/" render={routerProps => {return <Login history={routerProps.history} handleLogin = {this.handleLogin} />}} />
-          <Route exact path="/profile" render={()=>{ return <Profile currentUser={this.state.auth.currentUser} />}} />
+          <Route exact path="/profile" render={routerProps =>{ return <Profile history={routerProps.history} currentUser={this.state.auth.currentUser} />}} />
         </div>
 
       </div>

@@ -26,7 +26,7 @@ class Login extends React.Component {
           this.setState({ error: true });
         } else {
           console.log("User is", res);
-          this.props.handleLogin(res);
+          this.props.handleLogin(res.student);
           this.props.history.push('/profile');
         }
       });

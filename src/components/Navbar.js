@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 class Navbar extends React.Component{
   render(){
@@ -7,11 +7,8 @@ class Navbar extends React.Component{
     const userType = this.props.currentUser.user_type
     return (
       <div className="ui top menu">
-        <Link to="/" className="header item">
+        <Link to="/home" className="header item">
           <img src='https://retrocdn.net/images/thumb/c/c5/Logo-vinyl.svg/370px-Logo-vinyl.svg.png' />
-        </Link>
-        <Link to="/about" className="item">
-          About Us
         </Link>
         <Link to="/profile" className="item">
           Profile
@@ -24,8 +21,11 @@ class Navbar extends React.Component{
           <div className="right menu top">
           {
             userType === "student" ?
-            <div className="right menu top"><a onClick={this.props.handleLogout} className="item menu"><div className="ui primary button"> + New Session </div></a>
-            <a onClick={this.props.handleLogout} className="item menu"><div className="ui primary button">Log Out</div></a></div> : <a onClick={this.props.handleLogout} className="item menu"><div className="ui primary button">Log Out</div></a>
+            <div className="right menu top"><Link to="/reservation" className="item menu"><div className="ui primary button"> + New Session </div></Link>
+            <a onClick={ () => {
+                this.props.history.push('/')
+                this.props.handleLogout()}}
+              className="item menu"><div className="ui primary button">Log Out</div></a></div> : <a onClick={this.props.handleLogout} className="item menu"><div className="ui primary button">Log Out</div></a>
           } </div> :  <Link to="/" className="item right menu ">
               <div className="ui primary button right">Log In</div>
           </Link>
@@ -36,4 +36,4 @@ class Navbar extends React.Component{
   }
 }
 
-export default Navbar
+export default withRouter(Navbar)
