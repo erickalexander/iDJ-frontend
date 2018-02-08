@@ -1,15 +1,24 @@
 import React from 'react'
+import helper from '../services/helpers';
+
 var dateFormat = require('dateformat')
+
 
 const Profile = props =>{
     console.log("cool",props);
     const userType = props.currentUser.user_type
     const rate = props.currentUser.rate
-    const studentReservations = props.currentUser.reservations
+    const studentSessions = props.currentUser.sessions
+    const studentInstructors = props.currentUser.instructors
     const instructorSessions = props.currentUser.sessions
     const currentUser = props.currentUser.name
+
+    console.log("SESSSIONS",studentSessions);
+    console.log("MMNNMMNMM",studentInstructors);
     console.log("type", userType);
     console.log("profile", props.currentUser.name);
+    console.log("INSTRUCTORSASASAS", studentInstructors);
+    console.log("Reservations", props.currentUser.reservations); //somehow i have to push the return from newReservation to this array or  the parent in App.js
 
 
     const token = localStorage.getItem('token')
@@ -33,15 +42,28 @@ const Profile = props =>{
         </div>
         {
           currentUser !== undefined ?
-          <div className="eight wide column">
+          <div className="eight wide column ui grid">
             {userType === "student" ?
               <div>
-              <div><h1> Reservations {studentReservations.map(res => <li>Instructor ID: {res.sessions[0].instructor_id} <br /> Start Time: {dateFormat(res.sessions[0].start_time,"dddd, mmmm dS, yyyy, h:MM:ss TT")} <br /> End Time:{dateFormat(res.sessions[0].end_time,"dddd, mmmm dS, yyyy, h:MM:ss TT")}</li>)} </h1> <br /></div>
+              <div className="eight wide column"><h1> Sessions: {studentSessions.map(res => <li>Instructor Name: {res.instructor.name} <br /> Start Time: {dateFormat(res.start_time,"dddd, mmmm dS, yyyy, h:MM:ss TT")} <br /> End Time:{dateFormat(res.end_time,"dddd, mmmm dS, yyyy, h:MM:ss TT")}</li>)} </h1> <br /></div>
 
-              <div><h1>Instructors</h1></div>
+              <div><h1>Instructors
+              {studentInstructors.map(i => <li>Name: {(i.name)} <br /> Location: {i.location}</li>)}
+              </h1></div>
               </div>
                 :
+              <div className="eight wide column">
               <h1> Sessions </h1>
+              {instructorSessions.map(res => <div className="four wide column">
+                <div key={res.id} className="ui card">
+                  <div className="content">
+                     <p>Start Time: {dateFormat(res.start_time,"h:MM:ss TT")}</p>
+                     <p>End Time: {dateFormat(res.end_time,"h:MM:ss TT")}</p>
+                  </div>
+                 <button className="ui button primary">Mark Complete</button>
+                </div>
+              </div>)
+             }</div>
             }
 
           </div> : null

@@ -2,6 +2,7 @@
   text-align: center;
 }
 
+
 img {
   max-width: 300px
 }
@@ -29,4 +30,40 @@ img {
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+body, html {
+    height: 100%;
+}
+
+.bg {
+    /* The image used */
+    background-image: url("https://media.giphy.com/media/xT9DPGdMZWQtz1ZgUE/giphy.gif");
+
+    /* Full height */
+    height: auto;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.buttoncenter {
+    position: fixed;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100px; /* width of button */
+    height: 30px; /* height of button */
+}
+
+.home {
+  padding-top: 150px;
+  color: white
+}
+.white{
+  color: white
 }

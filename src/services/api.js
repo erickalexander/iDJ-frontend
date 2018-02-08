@@ -30,13 +30,16 @@ const getCurrentUser = () => {
   }).then(res => res.json());
 };
 
+
+
 const newReservation = data => {
-  console.log('DATA is', data);
-  return fetch(`${API_ROOT}/reservations`, {
-    method: 'POST',
+  console.log('Session is', data[0].id);
+  console.log("USERCOOOL", data[1]);
+  return fetch(`${API_ROOT}/sessions/${data[0].id}`, {
+    method: 'PATCH',
     headers,
-    body: JSON.stringify(data)
-  }).then(res => res.json());
+    body: JSON.stringify({id: data[0].id, student_id: data[1].id})
+  }).then(getSessions);
 };
 
 
@@ -51,7 +54,12 @@ export default {
   auth: {
     login,
     getCurrentUser,
-    newReservation,
-    getSessions
   },
+  reservations: {
+    newReservation
+  },
+
+  sessions: {
+    getSessions
+  }
 }

@@ -26,16 +26,18 @@ class Login extends React.Component {
           this.setState({ error: true });
         } else {
           console.log("User is", res);
-          this.props.handleLogin(res.student);
+
+          this.props.handleLogin(res);
           this.props.history.push('/profile');
         }
       });
     };
+
     render(){
     const { fields } = this.state;
 
     return(
-      <div className="ui center aligned grid">
+      <div className="ui middle aligned center aligned grid">
         <div className="column">
           <h2 className="ui image header">
             <div className="content">
@@ -48,7 +50,7 @@ class Login extends React.Component {
               <div className="field">
                 <div className="ui left icon input">
                   <i className="user icon"></i>
-                  <input type="text" name="username" placeholder="Username"                 value={fields.username} onChange={this.handleChange} />
+                  <input type="text" name="username" placeholder="Username"value={fields.username} onChange={this.handleChange} />
                 </div>
               </div>
               <div className="field">

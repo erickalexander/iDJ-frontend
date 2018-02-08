@@ -6,8 +6,8 @@ class Navbar extends React.Component{
     const loggedIn = !!this.props.currentUser.id
     const userType = this.props.currentUser.user_type
     return (
-      <div className="ui top menu">
-        <Link to="/home" className="header item">
+      <div className=" ui top menu">
+        <Link to="/" className="header item">
           <img src='https://retrocdn.net/images/thumb/c/c5/Logo-vinyl.svg/370px-Logo-vinyl.svg.png' />
         </Link>
         <Link to="/profile" className="item">
@@ -21,12 +21,12 @@ class Navbar extends React.Component{
           <div className="right menu top">
           {
             userType === "student" ?
-            <div className="right menu top"><Link to="/reservation" className="item menu"><div className="ui primary button"> + New Session </div></Link>
+            <div className="right menu top"><Link to="/reservation" className="item menu"><div className="ui primary button"> + New Reservation </div></Link>
             <a onClick={ () => {
                 this.props.history.push('/')
                 this.props.handleLogout()}}
-              className="item menu"><div className="ui primary button">Log Out</div></a></div> : <a onClick={this.props.handleLogout} className="item menu"><div className="ui primary button">Log Out</div></a>
-          } </div> :  <Link to="/" className="item right menu ">
+              className="item menu"><div className="ui primary button">Log Out</div></a></div> : <div className="right menu top"><Link to="/newsession" className="item menu"><div className="ui primary button"> + New Session </div></Link> <a onClick={this.props.handleLogout} className="item menu"><div className="ui primary button">Log Out</div></a></div>
+          } </div> :  <Link to="/login" className="item right menu ">
               <div className="ui primary button right">Log In</div>
           </Link>
         }

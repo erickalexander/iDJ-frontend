@@ -4,7 +4,8 @@ import Navbar from './components/Navbar'
 import Homepage from './components/Homepage'
 import Login from './components/Login'
 import Profile from './components/Profile'
-import Reservation from './components/Reservation'
+import Session from './components/Session'
+import SessionForm from './components/SessionForm'
 import { Route } from 'react-router-dom'
 import api from './services/api'
 
@@ -22,10 +23,22 @@ class App extends Component {
     }
   }
 
-  handleLogin = (user) => {
-    console.log(user);
+  handleSubmit = (data) =>{
+    console.log("reservations",this.state.auth.currentUser.sessions)
+    console.log("session",data);
+    function response(session) {
+        return session.id === data[0].id;
+    }
+
+    this.state.auth.currentUser.sessions.push(data.find(response))
+  }
+
+  handleLogin = (data) => {
+    console.log('User Logged In', data);
+    const user = data.student || data.instructor
     const currentUser = {currentUser: user}
-    const userOnline = {token: user.id, type: user.user_type}
+    console.log("CURRENT!!!",currentUser);
+    const userOnline = {token: data.token, type: user.user_type}
     console.log("INNN", userOnline);
     localStorage.setItem('token', JSON.stringify(userOnline))
     this.setState({auth: currentUser})
@@ -43,11 +56,12 @@ class App extends Component {
         <Navbar currentUser={this.state.auth.currentUser}
           handleLogout={this.handleLogout}
           />
+        <Route exact path="/" render={routerProps => {return <Homepage history={routerProps.history} />}} />
         <div className="ui container">
-          <Route exact path="/home" render={routerProps => {return <Homepage history={routerProps.history} />}} />
-          <Route exact path="/reservation" component={Reservation} />
-          <Route exact path="/" render={routerProps => {return <Login history={routerProps.history} handleLogin = {this.handleLogin} />}} />
+          <Route exact path="/reservation" render={routerProps => {return<Session handleSubmit={this.handleSubmit} currentUser={this.state.auth.currentUser}/>}} />
+          <Route exact path="/login" render={routerProps => {return <Login history={routerProps.history} handleLogin = {this.handleLogin} />}} />
           <Route exact path="/profile" render={routerProps =>{ return <Profile history={routerProps.history} currentUser={this.state.auth.currentUser} />}} />
+          <Route exact path="/newsession" render={routerProps => {return <SessionForm history={routerProps.history} currentUser={this.state.auth.currentUser} /> }} />
         </div>
 
       </div>
