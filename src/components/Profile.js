@@ -19,7 +19,7 @@ const Profile = props =>{
     console.log("profile", props.currentUser.name);
     console.log("INSTRUCTORSASASAS", studentInstructors);
     console.log("Reservations", props.currentUser.reservations); //somehow i have to push the return from newReservation to this array or  the parent in App.js
-
+    console.log("INSTSESSIONS", instructorSessions);
 
     const token = localStorage.getItem('token')
     if(!token){
@@ -45,25 +45,74 @@ const Profile = props =>{
           <div className="eight wide column ui grid">
             {userType === "student" ?
               <div>
-              <div className="eight wide column"><h1> Sessions: {studentSessions.map(res => <li>Instructor Name: {res.instructor.name} <br /> Start Time: {dateFormat(res.start_time,"dddd, mmmm dS, yyyy, h:MM:ss TT")} <br /> End Time:{dateFormat(res.end_time,"dddd, mmmm dS, yyyy, h:MM:ss TT")}</li>)} </h1> <br /></div>
-
-              <div><h1>Instructors
-              {studentInstructors.map(i => <li>Name: {(i.name)} <br /> Location: {i.location}</li>)}
-              </h1></div>
-              </div>
-                :
               <div className="eight wide column">
-              <h1> Sessions </h1>
-              {instructorSessions.map(res => <div className="four wide column">
+                <h1> Upcoming Sessions</h1>
+                {studentSessions.map(res => (res.status === "active" && res.completed_status === false) ?  <div className="four wide column">
+                  <div key={res.id} className="ui card">
+                    <div className="content">
+                       <p>Instructor: {res.instructor.name}</p>
+                       <p>Start Time: {dateFormat(res.start_time,"h:MM:ss TT")}</p>
+                       <p>End Time: {dateFormat(res.end_time,"h:MM:ss TT")}</p>
+                    </div>
+                  </div>
+                </div> :null)}
+                <div className="eight wide column">
+                  <h1> Completed Sessions</h1>
+                  {studentSessions.map(res => (res.completed_status !== false) ?  <div className="four wide column">
+                    <div key={res.id} className="ui card">
+                      <div className="content">
+                         <p>Instructor: {res.instructor.name}</p>
+                         <p>Start Time: {dateFormat(res.start_time,"h:MM:ss TT")}</p>
+                         <p>End Time: {dateFormat(res.end_time,"h:MM:ss TT")}</p>
+                         <button className="ui button primary">Leave a Rating</button>
+
+                      </div>
+                    </div>
+                  </div> :null)}
+              </div>
+            </div>
+          </div>
+                :
+              <div>
+              <div className="eight wide column">
+              <h1> Upcoming Appoitments </h1>
+              {instructorSessions.map(res => (res.status === "active" && res.completed_status === false) ? <div className="four wide column">
                 <div key={res.id} className="ui card">
                   <div className="content">
+                     <p>Student: {res.student.name}</p>
                      <p>Start Time: {dateFormat(res.start_time,"h:MM:ss TT")}</p>
                      <p>End Time: {dateFormat(res.end_time,"h:MM:ss TT")}</p>
                   </div>
                  <button className="ui button primary">Mark Complete</button>
                 </div>
-              </div>)
+              </div> : null)
              }</div>
+             <div className="eight wide column">
+             <h1> Available Sessions Not Yet Booked </h1>
+             {instructorSessions.map(res => res.status !== "active" ? <div className="four wide column">
+               <div key={res.id} className="ui card">
+                 <div className="content">
+                    <p>Start Time: {dateFormat(res.start_time,"h:MM:ss TT")}</p>
+                    <p>End Time: {dateFormat(res.end_time,"h:MM:ss TT")}</p>
+                 </div>
+                <button className="ui button primary">Mark Complete</button>
+               </div>
+             </div> : null)
+           }</div>
+           <div className="eight wide column">
+           <h1> Sessions Completed </h1>
+           {instructorSessions.map(res => res.completed_status !== false ? <div className="four wide column">
+             <div key={res.id} className="ui card">
+               <div className="content">
+                  <p>Student: {res.student.name}</p>
+                  <p>Start Time: {dateFormat(res.start_time,"h:MM:ss TT")}</p>
+                  <p>End Time: {dateFormat(res.end_time,"h:MM:ss TT")}</p>
+                  <h1>COMPLETED</h1>
+               </div>
+             </div>
+           </div> : null)
+         }</div>
+          </div>
             }
 
           </div> : null

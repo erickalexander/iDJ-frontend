@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link} from 'react-router-dom'
 
-
-const Homepage = props =>{
+class Homepage extends React.Component{
+  render(){
     return(
         <div className="bg">
           <h1 className="home">Welcome to IDJ</h1>
@@ -64,7 +64,7 @@ const Homepage = props =>{
 
         </div>
 
-    )
+    )}
 }
 
 export default Homepage
