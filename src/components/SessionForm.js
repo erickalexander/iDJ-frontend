@@ -19,6 +19,19 @@ class SessionForm extends React.Component{
         // currentUser:props.currentUser
       };
     }
+  handleChange = e => {
+    const newFields = { ...this.state.fields, [e.target.name]: e.target.value };      this.setState({ fields: newFields });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    let data = [this.props.currentUser.id,this.state.fields]
+    console.log("DATA 1", data);
+    api.sessions.newSession(data).then(res =>{
+      console.log("RESPONSE",res);
+    this.props.handleNewSession(res)
+  })
+  };
 
   componentDidMount(){
     api.sessions.getSessions().then(res =>{
@@ -34,16 +47,39 @@ class SessionForm extends React.Component{
     const userLocation = this.props.currentUser.location
     const userSessions = this.props.currentUser.reservations
     console.log("SASASAS",userSessions);
+    const { fields } = this.state;
+    var times = []
+      , periods = ['am', 'pm']
+      , hours = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+      , prop = null
+      , hour = null
+      , min = null;
+
+    for (prop in periods) {
+      for (hour in hours) {
+        for (min = 0; min < 60; min += 30) {
+          times.push(('0' + hours[hour]).slice(-2) + ':' + ('0' + min).slice(-2) + " " + periods[prop]);
+        }
+      }
+    }
+    console.log(times);
 
     return(
       <div>
       <h1 class="center header">New Session</h1>
-      <div className="ui form">
-        <input type="date" placeholder="Date"/>
-        <input type="time"placeholder="Start Time"/>
-        <input type="time"placeholder="End Time"/>
-        <button class="ui button primary">Submit</button>
-      </div>
+      <form className="ui form" onSubmit={this.handleSubmit}>
+        <label>Date</label>
+        <input name="date" type="date" value={fields.date} onChange={this.handleChange} />
+        <label>Start Time</label>
+        <select name="start_time" value={fields.start_time} onChange={this.handleChange}>
+          {times.map(t=> <option>{t}</option>)}
+        </select>
+        <label>End Time</label>
+        <select name="end_time" value={fields.end_time} onChange={this.handleChange}>
+          {times.map(t=> <option>{t}</option>)}
+        </select>
+        <button type="submit" class="ui button primary">Submit</button>
+      </form>
       </div>
     )
   }

@@ -1,5 +1,6 @@
 import React from 'react'
 import api from '../services/api';
+import { Link} from 'react-router-dom'
 
 
 class Login extends React.Component {
@@ -67,7 +68,7 @@ class Login extends React.Component {
           </form>
 
           <div className="ui message">
-            New to us? <a href="#">Register</a>
+            New to us? <Link to="signup">Register</Link>
         </div>
       </div>
     </div>

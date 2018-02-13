@@ -22,9 +22,9 @@ class Homepage extends React.Component{
                               <Link to="/login" class="ui primary button">
                                 Login
                               </Link>
-                              <button class="ui primary button">
+                              <Link to="/signup"class="ui primary button">
                                 SignUp
-                              </button>
+                              </Link>
                             </div>
 
                               <br />
