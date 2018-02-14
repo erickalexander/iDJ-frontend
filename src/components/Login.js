@@ -38,10 +38,14 @@ class Login extends React.Component {
     const { fields } = this.state;
 
     return(
-      <div className="ui middle aligned center aligned grid">
+      <div className="bg2">
+      <div className="ui container">
+      <div className="ui middle aligned center aligned grid" style={{padding: '250px'}}>
         <div className="column">
-          <h2 className="ui image header">
-            <div className="content">
+          <div>
+          <h2 className="ui color1 header image ">
+            <img src="https://retrocdn.net/images/thumb/c/c5/Logo-vinyl.svg/370px-Logo-vinyl.svg.png" class="image"/>
+            <div className="content center login">
               Log-in to your account
             </div>
           </h2>
@@ -60,7 +64,7 @@ class Login extends React.Component {
                   <input type="password" name="password" placeholder="Password" value={fields.password} onChange={this.handleChange}/>
                 </div>
               </div>
-              <button type="submit" className="ui fluid large blue submit button">Login</button>
+              <button type="submit" className="ui fluid large color1 submit button">Login</button>
             </div>
 
             <div className="ui error message"></div>
@@ -69,10 +73,12 @@ class Login extends React.Component {
 
           <div className="ui message">
             New to us? <Link to="signup">Register</Link>
-        </div>
+          </div>
       </div>
     </div>
-
+    </div>
+    </div>
+  </div>
       )
     }
 }

@@ -33,10 +33,20 @@ class Session extends React.Component{
     const sessions = this.state.sessions.map((session) => ((session.instructor.location === this.props.currentUser.location)&&(session.student === null)) ? <SessionCard session={session} key={session.id} currentUser={this.props.currentUser} history={this.props.history} handleSubmit={this.props.handleSubmit}/> : null)
     console.log("SSSSSS",sessions);
     return(
-      <div className=" ui grid container ">
-      {sessions}
+
+      <div className="bg2">
+      <div className="ui container">
+      <div className="App" style={{padding: '100px'}}>
+      <h1>Available Sessions In Your Area</h1>
+
+      <div className="ui grid">
+        {sessions}
       </div>
+      </div>
+      </div>
+     </div>
     )
+
   }
 }
 

@@ -10,7 +10,7 @@ class Signup extends React.Component{
       username: "",
       password: "",
       name: "",
-      location: "",
+      location: "Manhattan",
       level: "",
       user_type: "instructor",
       picture: "",
@@ -28,7 +28,6 @@ class Signup extends React.Component{
     e.preventDefault()
     api.auth.signup(this.state.username, this.state.password, this.state.name, this.state.location, this.state.level,this.state.user_type, this.state.picture, this.state.rate).then(res =>
     {console.log("RESaassa",res);
-      this.props.handleLogin(res)
       this.props.history.push('/login')
   }
     )
@@ -39,9 +38,12 @@ class Signup extends React.Component{
     const boroughs = ["Manhattan", "Staten Island", "Brooklyn", "Queens", "Bronx"]
     const levels = ["Beginner", "Intermediate", "Expert"]
     return(
-      <div className = "ui one column stackable center aligned page grid">
+      <div className="bg3">
+      <div className="ui container">
+      <div className = "ui one column stackable center aligned page grid" style={{padding: '100px'}}>
+        <div className="box2">
         <div className="column twelve wide" >
-          <h1>Sign Up</h1>
+          <h1 className="signup">Sign Up</h1>
         <div className="ui form">
           <form onSubmit={this.handleSubmit}>
             <div className="ui field">
@@ -115,14 +117,16 @@ class Signup extends React.Component{
                 onChange={this.handleChange}
               />
             </div>
-            <button type="submit" className="ui basic green button">
+            <button type="submit" className="ui color1 button">
               Signup
             </button>
           </form>
         </div>
         </div>
         </div>
-
+        </div>
+        </div>
+      </div>
     )
   }
 

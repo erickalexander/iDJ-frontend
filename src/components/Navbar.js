@@ -6,28 +6,32 @@ class Navbar extends React.Component{
     const loggedIn = !!this.props.currentUser.id
     const userType = this.props.currentUser.user_type
     return (
-      <div className=" ui top menu">
+      <div className="ui fixed inverted top menu">
         <Link to="/" className="header item">
           <img src='https://retrocdn.net/images/thumb/c/c5/Logo-vinyl.svg/370px-Logo-vinyl.svg.png' />
+          <h1>IDJ</h1>
         </Link>
-        <Link to="/profile" className="item">
-          Profile
-        </Link>
+
+
         {
-          loggedIn ? <div className="item">{`Welcome ${this.props.currentUser.username}`}</div> :null
+          loggedIn ? <div className="left menu top">
+          <div className="item">{`${this.props.currentUser.user_type} Portal` }</div>
+          <a className="item menu"><button className="ui color1 button"><Link to="/profile">
+            Profile
+          </Link></button></a> </div> :null
         }
         {
           loggedIn ?
           <div className="right menu top">
           {
             userType === "student" ?
-            <div className="right menu top"><Link to="/reservation" className="item menu"><div className="ui primary button"> + New Reservation </div></Link>
+            <div className="right menu top"><Link to="/reservation" className="item menu"><div className="ui color1 button"> + New Reservation </div></Link>
             <a onClick={ () => {
                 this.props.history.push('/')
                 this.props.handleLogout()}}
-              className="item menu"><div className="ui primary button">Log Out</div></a></div> : <div className="right menu top"><Link to="/newsession" className="item menu"><div className="ui primary button"> + New Session </div></Link> <a onClick={this.props.handleLogout} className="item menu"><div className="ui primary button">Log Out</div></a></div>
+              className="item menu"><div className="ui button color1" >Log Out</div></a></div> : <div className="right menu top"><Link to="/newsession" className="item menu"><div className="ui color1 button"> + New Session </div></Link> <a onClick={this.props.handleLogout} className="item menu"><div className="ui color1 button">Log Out</div></a></div>
           } </div> :  <Link to="/login" className="item right menu ">
-              <div className="ui primary button right">Log In</div>
+              <div className="ui color1 button right">Log In</div>
           </Link>
         }
 

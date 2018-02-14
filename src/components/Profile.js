@@ -45,10 +45,13 @@ const Profile = props =>{
     const true1 = props.currentUser.sessions ? props.currentUser.sessions.map(s => s.completed_status === true) : null
 
     return(
-      <div className="ui grid">
-        <div className="eight wide column">
-          <h1> Welcome {userType} </h1>
-          <img className='center' src={props.currentUser.picture} />
+      <div className="bg3">
+      <div className="ui container">
+      <div className="ui grid" style={{padding: '130px'}}>
+        <div className="six wide column">
+          <div className="Div1">
+          <img className='ui image circular medium' src={props.currentUser.picture} />
+          <div className='box'>
           <h2>Name: {props.currentUser.name}</h2>
           {
             rate ? <h2>Rate: ${props.currentUser.rate}/hr</h2>: null
@@ -57,35 +60,38 @@ const Profile = props =>{
 
           <h2>Location: {props.currentUser.location}</h2>
           <h2>Rating: {props.currentUser.rating}</h2>
-
+          </div>
+        </div>
         </div>
         {
           currentUser !== undefined ?
-          <div className="eight wide column ui grid">
+          <div className="ten wide column">
             {userType === "student" ?
-              <div>
-              <div className="eight wide column">
+          <div >
+              <div className="ui grid">
+                <div className="eight wide column">
                 <h1> Upcoming Sessions</h1>
-                {studentSessions.map(res => (res.status === "active" && res.completed_status === false) ?  <div className="four wide column">
-                  <div key={res.id} className="ui card">
+                {studentSessions.map(res => (res.status === "active" && res.completed_status === false) ?
+                  <div className="ten wide column">
+                  <div key={res.id} className="ui card column">
                     <div className="content">
                        <p>Instructor: {res.instructor.name}</p>
                        <p>Date: {dateFormat(res.start_time,"dddd, mmmm dS, yyyy")}</p>
                        <p>Start Time: {dateFormat(res.start_time,"h:MM:ss TT")}</p>
                        <p>End Time: {dateFormat(res.end_time,"h:MM:ss TT")}</p>
                     </div>
-                  </div>
-                </div> :null)}
-                <div className="eight wide column">
+
+                </div> </div>:null)}</div>
+              <div className="eight wide column">
                   <h1> Completed Sessions</h1>
-                  {studentSessions.map(res => (res.completed_status !== false && res.status === "active") ?  <div className="four wide column">
+                  {studentSessions.map(res => (res.completed_status !== false && res.status === "active") ?  <div className="ten wide column">
                     <div key={res.id} className="ui card">
                       <div className="content">
                          <p>Instructor: {res.instructor.name}</p>
                          <p>Date: {dateFormat(res.start_time,"dddd, mmmm dS, yyyy")}</p>
                          <p>Start Time: {dateFormat(res.start_time,"h:MM:ss TT")}</p>
                          <p>End Time: {dateFormat(res.end_time,"h:MM:ss TT")}</p>
-                         <button className="ui button primary">Leave a Rating</button>
+                         <button className="ui color1 button">Leave a Rating</button>
 
                       </div>
                     </div>
@@ -94,7 +100,7 @@ const Profile = props =>{
             </div>
           </div>
                 :
-              <div>
+              <div className="ui grid">
               <div className="eight wide column">
               <h1> Upcoming Appoitments </h1>
               {instructorSessions.map(res => (res.status === "active" && res.completed_status === false) ? <div className="four wide column">
@@ -105,22 +111,11 @@ const Profile = props =>{
                      <p>Start Time: {dateFormat(res.start_time,"h:MM:ss TT")}</p>
                      <p>End Time: {dateFormat(res.end_time,"h:MM:ss TT")}</p>
                   </div>
-                 <button onClick={() => handleComplete(res.id)} className="ui button primary">Mark Complete</button>
+                 <button onClick={() => handleComplete(res.id)} className="ui color1 button">Mark Complete</button>
                 </div>
               </div> : null)
              }</div>
-             <div className="eight wide column">
-             <h1> Available Sessions Not Yet Booked </h1>
-             {instructorSessions.map(res => res.status !== "active" ? <div className="four wide column">
-               <div key={res.id} className="ui card">
-                 <div className="content">
-                    <p>Date: {dateFormat(res.start_time,"dddd, mmmm dS, yyyy")}</p>
-                    <p>Start Time: {dateFormat(res.start_time,"h:MM:ss TT")}</p>
-                    <p>End Time: {dateFormat(res.end_time,"h:MM:ss TT")}</p>
-                 </div>
-               </div>
-             </div> : null)
-           }</div>
+
            <div className="eight wide column">
            <h1> Sessions Completed </h1>
            {instructorSessions.map(res => res.completed_status !== false ? <div className="four wide column">
@@ -130,18 +125,30 @@ const Profile = props =>{
                   <p>Date: {dateFormat(res.start_time,"dddd, mmmm dS, yyyy")}</p>
                   <p>Start Time: {dateFormat(res.start_time,"h:MM:ss TT")}</p>
                   <p>End Time: {dateFormat(res.end_time,"h:MM:ss TT")}</p>
-                  <h1>COMPLETED</h1>
+                  <h2>COMPLETED</h2>
                </div>
              </div>
            </div> : null)
          }</div>
+         <div className="eight wide column">
+         <h1> Available Sessions Not Yet Booked </h1>
+         {instructorSessions.map(res => res.status !== "active" ? <div className="four wide column">
+           <div key={res.id} className="ui card">
+             <div className="content">
+                <p>Date: {dateFormat(res.start_time,"dddd, mmmm dS, yyyy")}</p>
+                <p>Start Time: {dateFormat(res.start_time,"h:MM:ss TT")}</p>
+                <p>End Time: {dateFormat(res.end_time,"h:MM:ss TT")}</p>
+             </div>
+           </div>
+         </div> : null)
+       }</div>
           </div>
             }
 
           </div> : null
         }
 
-      </div>
+      </div></div></div>
     )
 }
 

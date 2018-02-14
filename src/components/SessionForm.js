@@ -3,10 +3,7 @@ import api from '../services/api';
 import SessionCard from './SessionCard'
 
 class SessionForm extends React.Component{
-  // const token = localStorage.getItem('token')
-  // if(!token){
-  //   this.props.history.push('/')
-  // }
+
   constructor(props) {
       super(props);
       this.state = {
@@ -42,6 +39,10 @@ class SessionForm extends React.Component{
 
 
   render(){
+    const token = localStorage.getItem('token')
+    if(!token){
+      this.props.history.push('/')
+    }
     console.log("Reservation state render",this.state.sessions);
     console.log("RESSSSS", this.props.currentUser.reservations);
     const userLocation = this.props.currentUser.location
@@ -65,21 +66,27 @@ class SessionForm extends React.Component{
     console.log(times);
 
     return(
-      <div>
-      <h1 class="center header">New Session</h1>
+      <div className="bg2">
+      <div className="ui container">
+      <div style={{padding: '100px'}}>
+      <div className="box3">
+      <h1>New Session</h1>
       <form className="ui form" onSubmit={this.handleSubmit}>
         <label>Date</label>
-        <input name="date" type="date" value={fields.date} onChange={this.handleChange} />
+        <input className="ui dropdown" name="date" type="date" value={fields.date} onChange={this.handleChange} />
         <label>Start Time</label>
-        <select name="start_time" value={fields.start_time} onChange={this.handleChange}>
+        <select className="ui dropdown" name="start_time" value={fields.start_time} onChange={this.handleChange}>
           {times.map(t=> <option>{t}</option>)}
         </select>
         <label>End Time</label>
-        <select name="end_time" value={fields.end_time} onChange={this.handleChange}>
+        <select className="ui dropdown" name="end_time" value={fields.end_time} onChange={this.handleChange}>
           {times.map(t=> <option>{t}</option>)}
         </select>
         <button type="submit" class="ui button primary">Submit</button>
       </form>
+      </div>
+      </div>
+      </div>
       </div>
     )
   }
