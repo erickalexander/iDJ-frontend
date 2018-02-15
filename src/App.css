@@ -76,7 +76,7 @@ body, html {
   background-image: url("https://wallpaperscraft.com/image/abstraction_passage_light_black_blue_413_1600x900.jpg");
 
   /* Full height */
-  height: 1300px;
+  min-height: 1500px;
   width:100%;
   margin:0 auto;
 
@@ -179,4 +179,10 @@ h1{
 
 label{
   font-size: 15px;
+}
+
+.container1{
+    margin: 0 auto;
+    width: 80%;
+    max-width: 1500px;
 }

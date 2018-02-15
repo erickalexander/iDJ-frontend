@@ -7,11 +7,17 @@ class Navbar extends React.Component{
     const userType = this.props.currentUser.user_type
     return (
       <div className="ui fixed inverted top menu">
+        {
+          loggedIn ? <Link to="/profile" className="header item">
+            <img src='https://retrocdn.net/images/thumb/c/c5/Logo-vinyl.svg/370px-Logo-vinyl.svg.png' />
+            <h1>IDJ</h1>
+          </Link> :
         <Link to="/" className="header item">
           <img src='https://retrocdn.net/images/thumb/c/c5/Logo-vinyl.svg/370px-Logo-vinyl.svg.png' />
           <h1>IDJ</h1>
         </Link>
 
+        }
 
         {
           loggedIn ? <div className="left menu top">

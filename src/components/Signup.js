@@ -13,7 +13,7 @@ class Signup extends React.Component{
       location: "Manhattan",
       level: "",
       user_type: "instructor",
-      picture: "",
+      picture: "https://www.slikouronlife.co.za/themes/slikourapp/assets/images/xartist-placeholder.png.pagespeed.ic.Fr7-YW7Gll.png",
       rate:""
     }
   }

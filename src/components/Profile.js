@@ -2,6 +2,8 @@ import React from 'react'
 import helper from '../services/helpers';
 import api from '../services/api';
 
+
+
 var dateFormat = require('dateformat')
 
 
@@ -46,10 +48,11 @@ const Profile = props =>{
 
     return(
       <div className="bg3">
-      <div className="ui container">
+      <div className="container1">
       <div className="ui grid" style={{padding: '130px'}}>
         <div className="six wide column">
           <div className="Div1">
+          <h1>Welcome {props.currentUser.name}</h1>
           <img className='ui image circular medium' src={props.currentUser.picture} />
           <div className='box'>
           <h2>Name: {props.currentUser.name}</h2>
@@ -57,9 +60,10 @@ const Profile = props =>{
             rate ? <h2>Rate: ${props.currentUser.rate}/hr</h2>: null
 
           }
-
           <h2>Location: {props.currentUser.location}</h2>
           <h2>Rating: {props.currentUser.rating}</h2>
+          <div class="ui star rating" data-rating="4"></div>
+
           </div>
         </div>
         </div>
@@ -101,7 +105,7 @@ const Profile = props =>{
           </div>
                 :
               <div className="ui grid">
-              <div className="eight wide column">
+              <div className="five wide column">
               <h1> Upcoming Appoitments </h1>
               {instructorSessions.map(res => (res.status === "active" && res.completed_status === false) ? <div className="four wide column">
                 <div key={res.id} className="ui card">
@@ -116,7 +120,7 @@ const Profile = props =>{
               </div> : null)
              }</div>
 
-           <div className="eight wide column">
+           <div className="five wide column">
            <h1> Sessions Completed </h1>
            {instructorSessions.map(res => res.completed_status !== false ? <div className="four wide column">
              <div key={res.id} className="ui card">
@@ -130,7 +134,7 @@ const Profile = props =>{
              </div>
            </div> : null)
          }</div>
-         <div className="eight wide column">
+       <div className="five wide column">
          <h1> Available Sessions Not Yet Booked </h1>
          {instructorSessions.map(res => res.status !== "active" ? <div className="four wide column">
            <div key={res.id} className="ui card">
