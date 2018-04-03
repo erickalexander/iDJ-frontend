@@ -1,6 +1,8 @@
 import React from 'react'
 import api from '../services/api';
 import SessionCard from './SessionCard'
+import { Link} from 'react-router-dom'
+
 
 class SessionForm extends React.Component{
 
@@ -82,7 +84,7 @@ class SessionForm extends React.Component{
         <select className="ui dropdown" name="end_time" value={fields.end_time} onChange={this.handleChange}>
           {times.map(t=> <option>{t}</option>)}
         </select>
-        <button type="submit" class="ui button primary">Submit</button>
+        <button type="submit" class="ui button primary"><Link to="profile"></Link>Submit</button>
       </form>
       </div>
       </div>
