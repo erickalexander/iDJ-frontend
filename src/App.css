@@ -47,7 +47,7 @@ body, html {
     background-image: url("https://media.giphy.com/media/qJWGUw3kZOVna/giphy.gif");
 
     /* Full height */
-    height: 1300px;
+    height: 1500px;
     width:100%;
     margin:0 auto;
     /* Center and scale the image nicely */
@@ -61,7 +61,7 @@ body, html {
   background-image: url("https://wallpaperscraft.com/image/abstraction_passage_light_black_blue_413_1600x900.jpg");
 
   /* Full height */
-  height: 1300px;
+  height: 1500px;
   width:100%;
   margin:0 auto;
 
@@ -174,7 +174,8 @@ body, html {
 }
 
 h1{
-  color: #66FCF1
+  color: #66FCF1;
+  font-family: "Times New Roman", Times, serif
 }
 
 label{

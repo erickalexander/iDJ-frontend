@@ -61,10 +61,9 @@ const Profile = props =>{
 
           }
           <h2>Location: {props.currentUser.location}</h2>
-          <h2>Rating: {props.currentUser.rating}</h2>
-          <div class="ui star rating" data-rating="4"></div>
-
+          <h2>Experience Level: {props.currentUser.level}</h2>
           </div>
+
         </div>
         </div>
         {
@@ -95,8 +94,6 @@ const Profile = props =>{
                          <p>Date: {dateFormat(res.start_time,"dddd, mmmm dS, yyyy")}</p>
                          <p>Start Time: {dateFormat(res.start_time,"h:MM:ss TT")}</p>
                          <p>End Time: {dateFormat(res.end_time,"h:MM:ss TT")}</p>
-                         <button className="ui color1 button">Leave a Rating</button>
-
                       </div>
                     </div>
                   </div> :null)}
